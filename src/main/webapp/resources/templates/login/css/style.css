@@ -1,0 +1,190 @@
+@import "popup.css";
+@import "autorization-form.css";
+html {
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+}
+body {
+  min-width: 320px;
+}
+@media screen and (max-width: 1330px) {
+  .about-us .container .plus-container.plus-container {
+    width: 42%;
+  }
+}
+@media screen and (max-width: 647px) {
+  .about-us .container .plus-container.plus-container {
+    width: 100%;
+    margin-left: 0;
+  }
+  .about-us .container .plus-container.plus-container:not(:first-child) {
+    margin-top: 25px;
+    margin-left: 0;
+  }
+}
+@media screen and (max-width: 580px) {
+  .main-banner .container.container {
+    padding-top: 40%;
+  }
+}
+@media screen and (max-width: 468px) {
+  .easy-using.easy-using .container h2 {
+    font-size: 41px;
+  }
+}
+@media screen and (max-width: 370px) {
+  h1.main-title.main-title {
+    font-size: 40px;
+  }
+  .about-us.about-us .container h2 {
+    font-size: 24px;
+  }
+  .sign-up.sign-up {
+    width: 215px;
+  }
+}
+.main-banner {
+  position: relative;
+  display: block;
+  top: 0;
+  left: 0;
+  background: url("../img/main-bunner-lite.jpg") center top no-repeat;
+  background-size: cover;
+  height: 1080px;
+}
+.main-banner .container {
+  width: 100%;
+  margin: 0 auto;
+  padding-top: 20%;
+}
+.main-banner h1 {
+  font-size: 62px;
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  color: white;
+  margin: 0 auto 50px auto;
+  font-weight: 200;
+  text-shadow: 0  0.6px black;
+}
+.main-banner button {
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  text-align: center;
+  background: transparent;
+  border: 1px solid white;
+  border-radius: 20px;
+  text-shadow: 0 0 0 0.2px black;
+  font-size: 32px;
+  font-weight: 200;
+  outline: none;
+  padding: 20px 40px;
+  box-shadow: 0 6px white;
+  color: white;
+}
+.main-banner button:hover {
+  background: white;
+  color: black;
+  box-shadow: 0 4px gray;
+  top: 2px;
+  transition: all 2s;
+}
+.about-us {
+  width: 100%;
+}
+.about-us .container {
+  padding: 20px 60px 60px 60px;
+  text-align: center;
+}
+.about-us .container h2 {
+  font-family: inherit;
+  font-weight: 200;
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 36px;
+  line-height: 48px;
+  text-shadow: 0 0 20px rgba(1, 1, 1, 0.2);
+}
+.about-us .container .plus-container {
+  display: inline-block;
+  position: relative;
+  width: 21%;
+}
+.about-us .container .plus-container:not(:first-child) {
+  margin-left: 40px;
+}
+.about-us .container .plus-container:hover {
+  transform: translateY(-20px);
+  transition: all 0.5s;
+}
+.about-us .container .plus-container .plus-info {
+  margin-top: 20px;
+  display: inline-block;
+  vertical-align: top;
+}
+.about-us .container .plus-container .plus-info .info-logo {
+  border: 4px solid #e0e2e2;
+  border-radius: 74px;
+  width: 140px;
+  height: 140px;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+.about-us .container .plus-container .plus-info .info-logo i {
+  font-size: 65px;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  top: 25%;
+  opacity: 0.6;
+}
+.about-us .container .plus-container h3 {
+  text-align: center;
+  display: block;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 26px;
+}
+.about-us .container .plus-container span {
+  text-align: center;
+  font-size: 16px;
+}
+.plus-container:hover .info-logo {
+  border-color: #fff200 !important;
+  background: #fff200;
+  transition: all 0.5s;
+}
+.plus-container:hover .info-logo > i {
+  opacity: 1 !important;
+  transition: opacity 0.5s;
+}
+.easy-using {
+  background: url("../img/easy-using-lite.jpg") center top no-repeat;
+  background-size: cover;
+  height: 534px;
+}
+.easy-using .container h2 {
+  font-size: 62px;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  color: white;
+  margin: 250px auto 0px auto;
+  font-weight: 200;
+  text-shadow: 0  0.9px black;
+}
+.footer {
+  /*
+  width: 100%;
+  */
+  height: 35px;
+  padding: 25px;
+  position: relative;
+  background-color: #bdbdbd;
+  color: white;
+}

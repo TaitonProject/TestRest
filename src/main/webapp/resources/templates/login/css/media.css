@@ -1,0 +1,36 @@
+@media screen and (max-width: 1330px) {
+  .about-us .container .plus-container.plus-container {
+    width: 42%;
+  }
+}
+@media screen and (max-width: 647px) {
+  .about-us .container .plus-container.plus-container {
+    width: 100%;
+    margin-left: 0;
+  }
+  .about-us .container .plus-container.plus-container:not(:first-child) {
+    margin-top: 25px;
+    margin-left: 0;
+  }
+}
+@media screen and (max-width: 580px) {
+  .main-banner .container.container {
+    padding-top: 40%;
+  }
+}
+@media screen and (max-width: 468px) {
+  .easy-using.easy-using .container h2 {
+    font-size: 41px;
+  }
+}
+@media screen and (max-width: 370px) {
+  h1.main-title.main-title {
+    font-size: 40px;
+  }
+  .about-us.about-us .container h2 {
+    font-size: 24px;
+  }
+  .sign-up.sign-up {
+    width: 215px;
+  }
+}
