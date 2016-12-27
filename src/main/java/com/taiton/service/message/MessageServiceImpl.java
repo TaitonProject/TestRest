@@ -21,13 +21,15 @@ public class MessageServiceImpl implements MessageService {
     private MessageDao messageDao;
 
     public boolean save(MessageEntity message) {
-        message.setBoardroomlistIdBoardroomList(14);
+
         message.setArrivalTime(Timestamp.valueOf(LocalDateTime.now()));
         if (messageDao.findBookedTime(message.getRequestedDate(),
                 message.getBoardroomlistIdBoardroomList(),
                 message.getRequestedTime(),
-                message.getDurationTime()) == 0)
+                message.getDurationTime()) == 0){
+            messageDao.save(message);
             return true;
+        }
         return false;
     }
 

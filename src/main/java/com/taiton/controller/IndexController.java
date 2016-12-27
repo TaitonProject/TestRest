@@ -6,6 +6,7 @@ import com.taiton.service.employee.EmployeeService;
 import com.taiton.service.message.MessageService;
 import com.taiton.validator.MessageValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,16 +36,23 @@ public class IndexController {
 
 
     @PostMapping("/addMessage")
-    public void addMessage(@RequestBody MessageEntity message, BindingResult bindingResult) {
-
+    public String addMessage(@RequestBody MessageEntity message, BindingResult bindingResult, Model model) {
+        message.setBoardroomlistIdBoardroomList(14);
         messageValidator.validate(message, bindingResult);
         if (!bindingResult.hasErrors()) {
             if (!messageService.save(message)) {
                 //выкинуть ошибку
-                String g = "g";
+                showError();
+                return "redirect:/error";
             }
-            String gh = "gr";
+            return "Добавление прошло успещно";
         }
+        return "";
+    }
+
+    @GetMapping("/error")
+    public String showError(){
+        return "Не удалось добавить заявку!";
     }
 
     @GetMapping("/employeeList.json")

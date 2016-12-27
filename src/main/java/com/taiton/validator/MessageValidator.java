@@ -45,19 +45,20 @@ public class MessageValidator implements Validator {
     public void validate(Object o, Errors errors) {
         //ValidationUtils.rejectIfEmpty(errors,"durationTime","message.empty");
         MessageEntity message = (MessageEntity) o;
-/*        long g = message.getDurationTime().getTime();
-        long gg = boardroomService.find(message.getBoardroomlistIdBoardroomList()).getClosingTime().getTime();
+        long g = message.getDurationTime().getTime();
+        long closingTime = boardroomService.find(message.getBoardroomlistIdBoardroomList()).getClosingTime().getTime();
+        long openningTime = boardroomService.find(message.getBoardroomlistIdBoardroomList()).getOpenningTime().getTime();
         long ggg = new Date(System.currentTimeMillis()).getTime();
         long fg = message.getRequestedDate().getTime();
-        *//*if(message.getRequestedTime().getTime() < boardroomService.find(14).getOpenningTime().getTime()){
+        if(message.getRequestedTime().getTime() < openningTime){
             errors.reject("errorMessage","message.afterTime");
-        } else *//*if(message.getDurationTime().getTime() > boardroomService.find(message.getBoardroomlistIdBoardroomList()).getClosingTime().getTime()){
+        } else if(message.getDurationTime().getTime() > closingTime){
             errors.reject("errorMessage","message.earlyTime");
         } else if(message.getRequestedDate().getTime() < new Date(System.currentTimeMillis()).getTime()){
             errors.reject("errorMessage","message.earlyDate");
         } else if(message.getDurationTime().getTime() <= message.getRequestedDate().getTime()){
             errors.reject("errorMessage","message.wrongInterval");
-        }*/
+        }
     }
 
 }

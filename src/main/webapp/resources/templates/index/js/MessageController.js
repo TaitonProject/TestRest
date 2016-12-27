@@ -14,9 +14,10 @@ MessageController = function ($scope, $http) {
             $scope.message = {
                 employeeIdEmployee : null,
                 durationTime : null,
-                requestedDate : null,
+                requestedDate :  null,
                 requestedTime : null,
-                employee : null
+                employee : null,
+                error : null
             };
         }).error(function () {
             $scope.setError('Не удалось добавить заявку')
