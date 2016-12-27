@@ -30,7 +30,7 @@ public class MessageValidator implements Validator {
         if (message == null) {
             throw new IllegalArgumentException("The supplied [Validator] is " +
                     "required and must not be null.");
-        } else if(employeeService.find(message.getEmployeeIdEmployee()) == null){
+        } else if(employeeService.findOne(message.getEmployeeIdEmployee()) == null){
             throw new IllegalArgumentException("The supplied [Validator] is " +
                     "required and must not be null.");
         }

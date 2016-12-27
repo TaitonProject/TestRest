@@ -15,7 +15,7 @@ public interface EmployeeService {
 
     void delete(EmployeeEntity employeeEntity);
 
-    EmployeeEntity find(int id);
+    EmployeeEntity findOne(int id);
 
     List<EmployeeEntity> findAll();
 }

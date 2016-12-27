@@ -12,14 +12,10 @@ MessageController = function ($scope, $http) {
             $scope.resetError();
             $scope.fetchMessagesList(message.requestedDate);
             $scope.message = {
-                idMessage : null,
-                arrivalTime : null,
                 employeeIdEmployee : null,
-                boardroomlistIdBoardroomList : null,
                 durationTime : null,
                 requestedDate : null,
                 requestedTime : null,
-                employeeName : null,
                 employee : null
             };
         }).error(function () {

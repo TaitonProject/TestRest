@@ -1,10 +1,9 @@
 package com.taiton.service.employee;
 
-import com.taiton.dao.employee.EmployeeDao;
+import com.taiton.dao.EmployeeDao;
 import com.taiton.entity.EmployeeEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -12,14 +11,12 @@ import java.util.List;
  * Created by Taiton on 11/6/2016.
  */
 @Service
-
 public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
     private EmployeeDao employeeDao;
 
     @Override
-    @Transactional
     public void save(EmployeeEntity employee) {
         employeeDao.save(employee);
     }
@@ -35,12 +32,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public EmployeeEntity find(int id) {
-        return employeeDao.find(id);
+    public EmployeeEntity findOne(int id) {
+        return employeeDao.findOne(id);
     }
 
     @Override
-    @Transactional
     public List<EmployeeEntity> findAll() {
         return employeeDao.findAll();
     }

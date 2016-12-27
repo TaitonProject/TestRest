@@ -1,12 +1,9 @@
 package com.taiton.service.boardroom;
 
-import com.taiton.dao.boardroom.BoardroomDao;
-import com.taiton.dao.employee.EmployeeDao;
+import com.taiton.dao.BoardroomDao;
 import com.taiton.entity.BoardroomlistEntity;
-import com.taiton.entity.EmployeeEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -14,14 +11,12 @@ import java.util.List;
  * Created by Taiton on 11/6/2016.
  */
 @Service
-
 public class BoardroomServiceImpl implements BoardroomService {
 
     @Autowired
     private BoardroomDao boardroomDao;
 
     @Override
-    @Transactional
     public void save(BoardroomlistEntity boardroomlistEntity) {
         boardroomDao.save(boardroomlistEntity);
     }
@@ -38,11 +33,10 @@ public class BoardroomServiceImpl implements BoardroomService {
 
     @Override
     public BoardroomlistEntity find(int id) {
-        return boardroomDao.find(id);
+        return boardroomDao.findOne(id);
     }
 
     @Override
-    @Transactional
     public List<BoardroomlistEntity> findAll() {
         return boardroomDao.findAll();
     }

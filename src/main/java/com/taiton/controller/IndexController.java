@@ -6,13 +6,9 @@ import com.taiton.service.employee.EmployeeService;
 import com.taiton.service.message.MessageService;
 import com.taiton.validator.MessageValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.sql.Date;
 import java.util.List;
 
@@ -39,7 +35,7 @@ public class IndexController {
 
 
     @PostMapping("/addMessage")
-    public ResponseEntity<MessageEntity> addMessage(@RequestBody MessageEntity message, BindingResult bindingResult) {
+    public void addMessage(@RequestBody MessageEntity message, BindingResult bindingResult) {
 
         messageValidator.validate(message, bindingResult);
         if (!bindingResult.hasErrors()) {
@@ -49,27 +45,37 @@ public class IndexController {
             }
             String gh = "gr";
         }
-        return new ResponseEntity<MessageEntity>(message, HttpStatus.OK);
     }
 
     @GetMapping("/employeeList.json")
-    public
-    List<EmployeeEntity> fetchEmployeeList() {
+    public List<EmployeeEntity> fetchEmployeeList() {
         List<EmployeeEntity> employeeEntities = employeeService.findAll();
         return employeeEntities;
     }
 
     @GetMapping("/messagesList.json/{date}")
-    public
-    List<MessageEntity> fetchMessagesList(@PathVariable("date") Date date) {
+    public List<MessageEntity> fetchMessagesList(@PathVariable("date") Date date) {
         List<MessageEntity> messageEntities = messageService.findByDate(date);
         return messageEntities;
     }
 
     @PutMapping(value = "/update")
     public void updateRailwayStation(@RequestBody MessageEntity message) {
-        messageService.updateMessage(message);
+        messageService.save(message);
     }
+
+
+/*
+    Query query = getSession().createQuery("FROM MessageEntity as m WHERE (m.requestedDate = :messageInput_requestDate)" +
+            "and (m.boardroomlistIdBoardroomList = :messageInput_boardroomid) and" +
+            "((:mIstart > m.requestedTime and :mIstart < m.durationTime) or" +
+            "(:mIend < m.durationTime and :mIend > m.requestedTime) or" +
+            "(:mIstart < m.requestedTime and :mIend > m.durationTime))")
+            .setParameter("messageInput_requestDate", messageInput.getRequestedDate(), TemporalType.DATE).
+                    setParameter("messageInput_boardroomid", messageInput.getBoardroomlistIdBoardroomList())
+            .setParameter("mIstart", messageInput.getRequestedTime(), TemporalType.TIME)
+            .setParameter("mIend", messageInput.getDurationTime(), TemporalType.TIME);
+*/
 
 
 }

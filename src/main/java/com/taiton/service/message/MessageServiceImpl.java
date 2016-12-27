@@ -1,12 +1,11 @@
 package com.taiton.service.message;
 
-import com.taiton.dao.message.MessageDao;
 import com.taiton.entity.MessageEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
+import com.taiton.dao.MessageDao;
 import java.sql.Date;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -21,14 +20,30 @@ public class MessageServiceImpl implements MessageService {
     @Autowired
     private MessageDao messageDao;
 
-    @Override
     public boolean save(MessageEntity message) {
         message.setBoardroomlistIdBoardroomList(14);
         message.setArrivalTime(Timestamp.valueOf(LocalDateTime.now()));
-        message.setIdMessage(message.getIdMessage());
-        if (messageDao.save(message))
+        if (messageDao.findBookedTime(message.getRequestedDate(),
+                message.getBoardroomlistIdBoardroomList(),
+                message.getRequestedTime(),
+                message.getDurationTime()) == 0)
             return true;
         return false;
+    }
+
+    @Override
+    public void delete(int id) {
+        messageDao.delete(id);
+    }
+
+    @Override
+    public void delete(MessageEntity employeeEntity) {
+        messageDao.delete(employeeEntity);
+    }
+
+    @Override
+    public MessageEntity findOne(int id) {
+        return messageDao.findOne(id);
     }
 
     @Override
@@ -37,18 +52,12 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public void delete(MessageEntity message) {
-        delete(message);
-    }
-
-    @Override
     public List<MessageEntity> findByDate(Date date) {
         return messageDao.findByDate(date);
     }
 
     @Override
-    public void updateMessage(MessageEntity message) {
-        messageDao.updateMessage(message);
+    public int findBookedTime(Date date, int id, Time startTime, Time endTime) {
+        return messageDao.findBookedTime(date, id, startTime, endTime);
     }
-
 }
