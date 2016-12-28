@@ -4,6 +4,7 @@
  */
 RegistrationController = function ($scope, $http) {
 
+    $scope.message = {};
     $scope.employee = {};
     $scope.editMode = false;
 
@@ -47,7 +48,7 @@ RegistrationController = function ($scope, $http) {
         $http.delete('registration/removeEmployee/' + idEmployee).success(function() {
             $scope.fetchEmployeeList();
         }).error(function() {
-            $scope.setError('Не удалось удалит ьсотрудника');
+            $scope.setError('Не удалось удалить сотрудника');
         });
         $scope.employee.name = '';
     };

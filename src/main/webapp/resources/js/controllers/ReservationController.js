@@ -18,8 +18,12 @@ ReservationController = function ($scope, $http) {
                 requestedDate :  null,
                 requestedTime : null
             };
-        }).error(function () {
-            $scope.setError('Не удалось добавить заявку')
+        }).error(function (data, status) {
+            if (status === 400){
+                $scope.setError('Чо-т не то!')
+            } else {
+                $scope.setError('Не удалось добавить заявку')
+            }
         });
     };
 
@@ -51,6 +55,12 @@ ReservationController = function ($scope, $http) {
         $http.get('reservation/messagesList.json/' + date).success(function(messagesList){
             $scope.messages = messagesList;
             $scope.reqDate = date;
+        }).error(function (data, status) {
+            if(status === 402){
+                $scope.errorMessage = 'Нет заявок на этот день.'
+            } else {
+              $scope.errorMessage = 'Не удалось вывести список заявок, поробуйте еще раз.'
+            }
         });
     };
 

@@ -25,25 +25,13 @@ public class MessageDeserializer extends JsonDeserializer<MessageEntity> {
     public MessageEntity deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
         MessageEntity message = new MessageEntity();
         JsonNode node = jsonParser.getCodec().readTree(jsonParser);
-        String requestedDateString = node.get("requestedDate").asText();
-        String requestedTimeString = node.get("requestedTime").asText();
-        String durationTimeString = node.get("durationTime").asText();
+
+        Date requestedDate = Date.valueOf(node.get("requestedDate").asText());
+        //  Такое себе, потом переделать
+        Time requestedTime = Time.valueOf(node.get("requestedTime").asText() + ":00");
+        Time durationTime = Time.valueOf(node.get("durationTime").asText() + ":00");
 
         int idEmployee = node.get("employeeIdEmployee").get("idEmployee").asInt();
-
-        SimpleDateFormat formatterDate = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat formatterTime = new SimpleDateFormat("hh:mm");
-        Date requestedDate = null;
-        Time requestedTime = null;
-        Time durationTime = null;
-
-        try {
-            durationTime = new Time(formatterTime.parse(durationTimeString).getTime());
-            requestedDate = new Date(formatterDate.parse(requestedDateString).getTime());
-            requestedTime = new Time(formatterTime.parse(requestedTimeString).getTime());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
 
         message.setRequestedDate(requestedDate);
         message.setRequestedTime(requestedTime);

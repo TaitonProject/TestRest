@@ -2,7 +2,6 @@ package com.taiton.controller;
 
 import com.taiton.entity.EmployeeEntity;
 import com.taiton.entity.MessageEntity;
-import com.taiton.exceptions.ResourceNotFoundException;
 import com.taiton.service.employee.EmployeeService;
 import com.taiton.service.message.MessageService;
 import com.taiton.validator.MessageValidator;
@@ -31,29 +30,17 @@ public class ReservationController {
 
     @Autowired
     MessageValidator messageValidator;
-/*
-    @InitBinder
-    protected void initBinder(WebDataBinder binder) {
-        binder.setValidator(new MessageValidator());
-    }*/
-
-
 
     @PostMapping("/addMessage")
-    public ResponseEntity<String> addMessage(@RequestBody MessageEntity message, BindingResult bindingResult) {
+    public ResponseEntity<MessageEntity> addMessage(@RequestBody MessageEntity message, BindingResult bindingResult) {
         message.setBoardroomlistIdBoardroomList(14);
         messageValidator.validate(message, bindingResult);
-        if (!bindingResult.hasErrors())
-        {
-            if (messageService.save(message)) {
-                return ResponseEntity.ok("Ok!");
-                //выкинуть ошибку
-            }
-            //return "Добавление прошло успещно";
-        } else {
-            throw new ResourceNotFoundException();
+        if(bindingResult.hasErrors()) {
+            return new ResponseEntity<MessageEntity>(HttpStatus.BAD_REQUEST);
+        } else if (messageService.save(message)) {
+            return new ResponseEntity<MessageEntity>(message, HttpStatus.OK);
         }
-        return ResponseEntity.badRequest().body("Bad Request");
+        return new ResponseEntity<MessageEntity>(HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping("/employeeList.json")
@@ -63,9 +50,11 @@ public class ReservationController {
     }
 
     @GetMapping("/messagesList.json/{date}")
-    public List<MessageEntity> fetchMessagesList(@PathVariable("date") Date date) {
+    public ResponseEntity<List<MessageEntity>> fetchMessagesList(@PathVariable("date") Date date) {
         List<MessageEntity> messageEntities = messageService.findByDate(date);
-        return messageEntities;
+        if (!messageEntities.isEmpty())
+            return new ResponseEntity<>(messageEntities, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PutMapping(value = "/update")
