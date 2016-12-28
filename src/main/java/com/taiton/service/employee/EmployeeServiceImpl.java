@@ -1,7 +1,10 @@
 package com.taiton.service.employee;
 
 import com.taiton.dao.EmployeeDao;
+import com.taiton.dao.MessageDao;
 import com.taiton.entity.EmployeeEntity;
+import com.taiton.entity.MessageEntity;
+import com.taiton.service.message.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,13 +21,26 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private EmployeeDao employeeDao;
 
+    @Autowired
+    private MessageService messageService;
+
+    @Autowired
+    private MessageDao messageDao;
+
     @Override
     public void save(EmployeeEntity employee) {
         employeeDao.save(employee);
     }
 
     @Override
+    public void saveAndFlush(EmployeeEntity employeeEntity) {
+        employeeDao.saveAndFlush(employeeEntity);
+    }
+
+    @Override
     public void delete(int id) {
+        messageDao.deleteByEmployee_idEmployee(id);
+        //deleteAllMessages(id);
         employeeDao.delete(id);
     }
 
@@ -42,4 +58,5 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List<EmployeeEntity> findAll() {
         return employeeDao.findAll();
     }
+
 }

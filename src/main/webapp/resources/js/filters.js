@@ -2,7 +2,7 @@
 
 /* Filters */
 
-var AppFilters = angular.module('TaitonBankApp.filters', []);
+var AppFilters = angular.module('AngularSpringApp.filters', []);
 
 AppFilters.filter('interpolate', ['version', function (version) {
     return function (text) {

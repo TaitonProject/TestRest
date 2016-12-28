@@ -29,7 +29,7 @@
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
                 <prop key="hibernate.show_sql">true</prop>
-                <prop key="hibernate.c3p0.timeout">300</prop>
+                <prop key="hibernate.c3p0.timeout">3000</prop>
             </props>
         </property>
     </bean>

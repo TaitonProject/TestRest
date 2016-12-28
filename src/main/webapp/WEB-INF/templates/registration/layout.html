@@ -1,38 +1,43 @@
-<div ng-repeat="user in users">
-    <div>{{user.username}}</div>
+<div class="alert alert-error" ng-show="error">
+    {{errorMessage}}
 </div>
 <form class="form-horizontal">
-
     <div class="control-group">
         <div class="controls">
-            <input type="text" id="user_name" ng-model="user.username"
-                   placeholder="Логин" required="required" min="6" />
-        </div>
-    </div>
-    <div class="control-group">
-        <div class="controls">
-            <input type="text" id="user_password" ng-model="user.password"
-                   placeholder="Пароль" required="required" min="6" />
-        </div>
-    </div>
-    <div class="control-group">
-        <div class="controls">
-            <input type="text" id="confirm_Password"
-                   ng-model="user.confirmPassword" placeholder="Повторите пароль" required="required" min="6" />
-        </div>
-    </div>
-    <div class="control-group" ng-controller="RoleController">
-        <div class="controls" >
-            <select ng-model="user.roleByRoleIdRole"
-                    ng-options="role as role.nameRole for role in roles">
-            </select>
+            <input type="text" id="employee_name" ng-model="employee.name"
+                   placeholder="Имя" required="required" min="6" />
         </div>
     </div>
     <div class="control-group">
         <hr />
         <div class="controls">
-            <button type="button" class="btn btn-primary"
-                    ng-click="addNewUser(user)">Добавить пользователя</button>
+            <button type="button" class="btn btn-primary" ng-disabled="!employee.name" ng-hide="editMode" ng-click="addEmployee(employee)">Add Employee</button>
+            <button type="button" class="btn btn-primary" ng-disabled="!employee.name" ng-show="editMode" ng-click="updateEmployee(employee)">Save Employee</button>
+            <button type="button" class="btn" ng-click="resetEmployeeForm()">Reset</button>
         </div>
     </div>
 </form>
+<hr />
+<h3>Employees List</h3>
+<div class="alert alert-info" ng-show="employees.length == 0">
+    No employees found
+</div>
+<table class="table table-bordered table-striped" ng-show="employees.length > 0">
+    <thead>
+    <tr>
+        <th style="text-align: center; width: 25px;">Id</th>
+        <th style="text-align: center;">Name</th>
+        <th style="text-align: center;">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="employee in employees | orderBy:predicate">
+        <td style="text-align: center;">{{employee.idEmployee}}</td>
+        <td style="text-align: center;">{{employee.name}}</td>
+        <td style="width:100px;text-align: center;">
+            <button class="btn btn-mini btn-danger" ng-click="removeEmployee(employee.idEmployee)">Remove</button>
+            <button class="btn btn-mini btn-success" ng-click="editEmployee(employee)">Edit</button>
+        </td>
+    </tr>
+    </tbody>
+</table>

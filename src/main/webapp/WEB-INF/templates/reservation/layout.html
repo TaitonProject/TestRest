@@ -1,0 +1,79 @@
+<div class="alert alert-error" ng-show="error">
+    {{errorMessage}}
+</div>
+<form class="form-horizontal">
+    <div class="control-group">
+        <label class="control-label">Дата бронирования</label>
+        <div class="controls">
+            <input ng-model="message.requestedDate" type="date" value="1941-06-22" min="{{date | date:'yyyy-MM-dd'}}"
+                   required
+                   ng-change="selectedDate(message.requestedDate)">
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label">Время начала</label>
+
+        <div class="controls">
+            <input ng-model="message.requestedTime" type="time" value="10:00" required=
+                    ng-change="selectedTime(message.requestedTime)">
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label">Время окончания</label>
+        <div class="controls">
+            <input id="durationTimeInput" min="" ng-model="message.durationTime" type="time" value="21:00"
+                   required>
+        </div>
+    </div>
+
+    <div class="control-group" >
+        <label class="control-label">Выберите свой профиль</label>
+        <div class="controls">
+            <select required ng-model="message.employeeIdEmployee"
+                    ng-options="employee as employee.name for employee in employees">
+            </select>
+        </div>
+
+    </div>
+
+    <div class="control-group">
+        <label class="control-label">Не нашли свой профиль?</label>
+        <div class="controls">
+
+        </div>
+    </div>
+
+    <div class="control-group">
+        <div class="controls">
+            <button type="button" class="btn btn-primary" ng-disabled="!message.durationTime || !message.requestedTime || !message.requestedDate" ng-hide="editMode" ng-click="addMessage(message)">Подать заявку</button>
+            <button type="button" class="btn btn-primary" ng-disabled="!message.durationTime || !message.requestedTime || !message.requestedDate" ng-show="editMode" ng-click="updateMessage(message)">Save Message</button>
+            <button type="button" class="btn" ng-click="resetMessageForm(message)">Reset</button>
+        </div>
+    </div>
+</form>
+<hr />
+<h3 ng-cloak="">Записи бронирования конференц-зала на {{reqDate}}</h3>
+<div ng-cloak="" class="alert alert-info" ng-show="messages.length == 0">
+    Заявок еще нет.
+</div>
+<table class="table table-bordered table-striped" ng-show="messages.length > 0">
+    <thead>
+    <tr>
+        <th style="text-align: center;">Время начала встречи</th>
+        <th style="text-align: center;">Время завершения встречи</th>
+        <th style="text-align: center;">Сотрудник</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr ng-model="message" ng-repeat="message in messages | orderBy:predicate">
+        <td style="width: 100px; text-align: center;" ng-bind="message.requestedTime"></td>
+        <td style="width: 100px; text-align: center;" ng-bind="message.durationTime"></td>
+        <td style="width: 100px; text-align: center;" ng-bind="message.employee">
+            <button class="btn btn-mini btn-success" ng-click="editMessage(message)">Edit</button>
+        </td>
+    </tr>
+    </tbody>
+</table>

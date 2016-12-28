@@ -19,7 +19,8 @@ import java.util.List;
  * Created by Taiton on 10/25/2016.
  */
 @RestController
-public class IndexController {
+@RequestMapping("/reservation")
+public class ReservationController {
 
     @Autowired
     EmployeeService employeeService;
@@ -30,10 +31,10 @@ public class IndexController {
     @Autowired
     MessageValidator messageValidator;
 
-    @InitBinder
+/*    @InitBinder
     protected void initBinder(WebDataBinder binder) {
         binder.setValidator(new MessageValidator());
-    }
+    }*/
 
     @PostMapping("/addMessage")
     public String addMessage(@RequestBody MessageEntity message, BindingResult bindingResult, Model model) {
@@ -42,17 +43,11 @@ public class IndexController {
         if (!bindingResult.hasErrors()) {
             if (!messageService.save(message)) {
                 //выкинуть ошибку
-                //showError();
                 return "redirect:/error";
             }
             return "Добавление прошло успещно";
         }
         return "";
-    }
-
-    @GetMapping("/error")
-    public String showError() {
-        return "Не удалось добавить заявку!";
     }
 
     @GetMapping("/employeeList.json")

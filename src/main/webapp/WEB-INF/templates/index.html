@@ -1,100 +1,26 @@
 <!doctype html>
-<html lang="en" ng-app>
+<html lang="en" ng-app="AngularSpringApp">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Расписание</title>
-
+    <meta charset="utf-8"/>
+    <title>Бронирование</title>
     <link rel="stylesheet" href="resources/css/app.css"/>
-    <link rel="stylesheet" href="resources/templates/index/css/form.css"/>
-    <link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="resources/templates/index/css/cloak.css"/>
+    <link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css" />
 </head>
-<body ng-controller="MessageController" ng-cloak="">
-<div class="container">
-    <div class="alert alert-error" ng-show="error" ng-bind="errorMessage"></div>
-    <form class="form-horizontal">
-
-        <h1>Бронирование конференц-зала</h1>
-
-        <div class="controll-panel">
-            <div class="container">
-                <div class="control-group data-controls">
-                    <label class="control-label">Выберите дату:</label>
-                    <div class="controls ">
-                        <input ng-model="message.requestedDate" type="date" value="1941-06-22" min="{{date | date:'yyyy-MM-dd'}}" required
-                               ng-change="selectedDate(message.requestedDate)">
-
-                    </div>
-                </div>
-
-                <div class="time-container">
-                    <div class="control-group">
-                        <div class="time-group">
-                            <div class="controls">
-                                <label class="control-label">С:</label>
-                                <input ng-model="message.requestedTime" type="time" value="10:00" required="required"
-                                       ng-change="selectedTime(message.requestedTime)">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <div class="time-group">
-
-                            <div class="controls">
-                                <label class="control-label">До:</label>
-                                <input ng-model="message.durationTime" type="time" value="21:00" required="required">
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="control-group">
-            <label class="control-label">Выберите свой профиль</label>
-            <div class="controls" ng-controller="EmployeeController">
-                <select ng-cloak ng-model="message.employeeIdEmployee"
-                        ng-options="employeeIdEmployee as employeeIdEmployee.name for employeeIdEmployee in authors">
-                </select>
-            </div>
-
-        </div>
-
-        <div class="control-group">
-            <div class="controls">
-                <button class="btn btn-success" id="btnDatePicker" ng-click="addMessage(message)">Подать заявку</button>
-            </div>
-        </div>
-    </form>
-
-
-    <div class="alert alert-info" ng-show="messages.length == 0">Заявок еще нет.</div>
-    <table class="table table-bordered table-striped" ng-show="messages.length > 0">
-        <h3>Бронирование конференц-зала на: {{message.requestedDate}}</h3>
-        <thead>
-        <tr>
-            <th style="text-align: center;">Время начала встречм</th>
-            <th style="text-align: center;">Время завершения встречи</th>
-            <th style="text-align: center;">Сотрудник</th>
-        </tr>
-        </thead>
-        <tbody>
-
-        <tr ng-model="message" ng-repeat="message in messages | orderBy:predicate">
-            <td style="width: 100px; text-align: center;" ng-bind="message.requestedTime"></td>
-            <td style="width: 100px; text-align: center;" ng-bind="message.durationTime"></td>
-            <td style="width: 100px; text-align: center;" ng-bind="message.employee">
-                <!--<button class="btn btn-mini btn-success" ng-click="editMessage(message)">Edit</button>-->
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <script src="resources/js/lib/angular/angular.js"></script>
-    <script src="resources/templates/index/js/MessageController.js"></script>
-    <script src="resources/templates/index/js/EmployeeController.js"></script>
+<body ng-cloak="">
+<div id="wrapper">
+    <ul class="menu">
+        <li><a href="#/reservation">Бронь</a></li>
+        <li><a href="#/registration">Регистрация сотрудника</a></li>
+    </ul>
+    <hr class="" />
+    <div ng-view=""></div>
 </div>
+<script src="resources/js/lib/angular/angular.js"></script>
+<script src="resources/js/app.js"></script>
+<script src="resources/js/services.js"></script>
+<script src="resources/js/controllers/ReservationController.js"></script>
+<script src="resources/js/controllers/RegistrationController.js"></script>
+<script src="resources/js/filters.js"></script>
+<script src="resources/js/directives.js"></script>
 </body>
 </html>

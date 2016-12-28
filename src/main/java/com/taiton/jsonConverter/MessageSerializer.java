@@ -25,7 +25,7 @@ public class MessageSerializer extends JsonSerializer<MessageEntity> {
         String requestedTime = new SimpleDateFormat("HH:mm").format(message.getRequestedTime());
         String durationTime = new SimpleDateFormat("HH:mm").format(message.getDurationTime());
         String employeeName = employeeService.findOne(message.getEmployeeIdEmployee()).getName();
-        String employeeIdName = message.getEmployeeIdEmployee() + " " + employeeName;
+        String employeeIdName = employeeName + " " + message.getEmployeeIdEmployee();
 
         jsonGenerator.writeStartObject();
         jsonGenerator.writeStringField("requestedDate", requestedDate);

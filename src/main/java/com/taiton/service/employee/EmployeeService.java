@@ -2,6 +2,7 @@ package com.taiton.service.employee;
 
 import com.taiton.entity.BoardroomlistEntity;
 import com.taiton.entity.EmployeeEntity;
+import com.taiton.entity.MessageEntity;
 
 import java.util.List;
 
@@ -10,6 +11,8 @@ import java.util.List;
  */
 public interface EmployeeService {
     void save(EmployeeEntity employeeEntity);
+
+    void saveAndFlush(EmployeeEntity employeeEntity);
 
     void delete(int id);
 
