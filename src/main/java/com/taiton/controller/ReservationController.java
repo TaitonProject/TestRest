@@ -37,7 +37,7 @@ public class ReservationController {
     }*/
 
     @PostMapping("/addMessage")
-    public String addMessage(@RequestBody MessageEntity message, BindingResult bindingResult, Model model) {
+    public String addMessage(@RequestBody MessageEntity message, BindingResult bindingResult) {
         message.setBoardroomlistIdBoardroomList(14);
         messageValidator.validate(message, bindingResult);
         if (!bindingResult.hasErrors()) {
