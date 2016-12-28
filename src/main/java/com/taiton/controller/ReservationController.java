@@ -6,9 +6,8 @@ import com.taiton.service.employee.EmployeeService;
 import com.taiton.service.message.MessageService;
 import com.taiton.validator.MessageValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
@@ -37,17 +36,18 @@ public class ReservationController {
     }*/
 
     @PostMapping("/addMessage")
-    public String addMessage(@RequestBody MessageEntity message, BindingResult bindingResult) {
+    public ResponseEntity<String> addMessage(@RequestBody MessageEntity message, BindingResult bindingResult) {
         message.setBoardroomlistIdBoardroomList(14);
         messageValidator.validate(message, bindingResult);
         if (!bindingResult.hasErrors()) {
-            if (!messageService.save(message)) {
+            if (messageService.save(message)) {
+                return ResponseEntity.ok("Ok!");
                 //выкинуть ошибку
-                return "redirect:/error";
+                //return "redirect:/error";
             }
-            return "Добавление прошло успещно";
+            //return "Добавление прошло успещно";
         }
-        return "";
+        return ResponseEntity.badRequest().body("Bad Request");
     }
 
     @GetMapping("/employeeList.json")

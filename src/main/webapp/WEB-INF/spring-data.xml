@@ -16,7 +16,22 @@
         <property name="url" value="${jdbc.url}"/>
         <property name="username" value="${jdbc.username}"/>
         <property name="password" value="${jdbc.password}"/>
+        <property name="maxIdle" value="10"/>
+        <property name="maxActive" value="100"/>
+        <property name="maxWait" value="10000"/>
+        <property name="validationQuery" value="select 1"/>
+        <property name="testOnBorrow" value="false"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="timeBetweenEvictionRunsMillis" value="1200000"/>
+        <property name="minEvictableIdleTimeMillis" value="1800000"/>
+        <property name="numTestsPerEvictionRun" value="5"/>
+        <property name="defaultAutoCommit" value="false"/>
     </bean>
+
+    <bean id="asyncTaskExecutor"
+          class="org.springframework.core.task.SimpleAsyncTaskExecutor"/>
+    <bean id="syncTaskExecutor"
+          class="org.springframework.core.task.SyncTaskExecutor" />
 
     <!-- Hibernate session factory -->
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
