@@ -30,8 +30,8 @@ public class ReservationController {
 
     @Autowired
     MessageValidator messageValidator;
-
-/*    @InitBinder
+/*
+    @InitBinder
     protected void initBinder(WebDataBinder binder) {
         binder.setValidator(new MessageValidator());
     }*/

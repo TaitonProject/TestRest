@@ -33,22 +33,22 @@ public class MessageDeserializer extends JsonDeserializer<MessageEntity> {
 
         SimpleDateFormat formatterDate = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat formatterTime = new SimpleDateFormat("hh:mm");
+        SimpleDateFormat formatterTime2 = new SimpleDateFormat("hh:mm");
         Date requestedDate = null;
         Time requestedTime = null;
-        Time durationTime = null;
+        Time durationTime2 = null;
 
         try {
+            durationTime2 = new Time(formatterTime2.parse(durationTimeString).getTime());
             requestedDate = new Date(formatterDate.parse(requestedDateString).getTime());
             requestedTime = new Time(formatterTime.parse(requestedTimeString).getTime());
-            durationTime = new Time(formatterTime.parse(durationTimeString).getTime());
-
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
         message.setRequestedDate(requestedDate);
         message.setRequestedTime(requestedTime);
-        message.setDurationTime(durationTime);
+        message.setDurationTime(durationTime2);
         message.setEmployeeIdEmployee(idEmployee);
         return message;
     }
