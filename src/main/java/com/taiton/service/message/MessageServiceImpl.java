@@ -4,6 +4,8 @@ import com.taiton.entity.MessageEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.taiton.dao.MessageDao;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -15,6 +17,7 @@ import java.util.List;
  * Created by Taiton on 11/6/2016.
  */
 @Service
+@Transactional
 public class MessageServiceImpl implements MessageService {
 
     @Autowired

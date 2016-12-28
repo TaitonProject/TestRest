@@ -45,15 +45,9 @@ public class MessageDeserializer extends JsonDeserializer<MessageEntity> {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-/*
-        Time myTime = java.sql.Time.valueOf(requestedTimeString + ":00");
 
-        LocalTime localtimeDuration = myTime.toLocalTime();
-        localtimeDuration = localtimeDuration.plusMinutes(requestedTime.getMinutes()).plusHours(requestedTime.getHours());
-*/
         message.setRequestedDate(requestedDate);
         message.setRequestedTime(requestedTime);
-        //message.setDurationTime(Time.valueOf(localtimeDuration));
         message.setDurationTime(durationTime);
         message.setEmployeeIdEmployee(idEmployee);
         return message;

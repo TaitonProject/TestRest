@@ -8,6 +8,7 @@ import com.taiton.validator.MessageValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
@@ -29,11 +30,10 @@ public class IndexController {
     @Autowired
     MessageValidator messageValidator;
 
-/*    @InitBinder
+    @InitBinder
     protected void initBinder(WebDataBinder binder) {
         binder.setValidator(new MessageValidator());
-    }*/
-
+    }
 
     @PostMapping("/addMessage")
     public String addMessage(@RequestBody MessageEntity message, BindingResult bindingResult, Model model) {
@@ -42,7 +42,7 @@ public class IndexController {
         if (!bindingResult.hasErrors()) {
             if (!messageService.save(message)) {
                 //выкинуть ошибку
-                showError();
+                //showError();
                 return "redirect:/error";
             }
             return "Добавление прошло успещно";
@@ -51,7 +51,7 @@ public class IndexController {
     }
 
     @GetMapping("/error")
-    public String showError(){
+    public String showError() {
         return "Не удалось добавить заявку!";
     }
 
@@ -71,19 +71,5 @@ public class IndexController {
     public void updateRailwayStation(@RequestBody MessageEntity message) {
         messageService.save(message);
     }
-
-
-/*
-    Query query = getSession().createQuery("FROM MessageEntity as m WHERE (m.requestedDate = :messageInput_requestDate)" +
-            "and (m.boardroomlistIdBoardroomList = :messageInput_boardroomid) and" +
-            "((:mIstart > m.requestedTime and :mIstart < m.durationTime) or" +
-            "(:mIend < m.durationTime and :mIend > m.requestedTime) or" +
-            "(:mIstart < m.requestedTime and :mIend > m.durationTime))")
-            .setParameter("messageInput_requestDate", messageInput.getRequestedDate(), TemporalType.DATE).
-                    setParameter("messageInput_boardroomid", messageInput.getBoardroomlistIdBoardroomList())
-            .setParameter("mIstart", messageInput.getRequestedTime(), TemporalType.TIME)
-            .setParameter("mIend", messageInput.getDurationTime(), TemporalType.TIME);
-*/
-
 
 }
