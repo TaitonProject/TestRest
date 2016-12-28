@@ -2,10 +2,12 @@ package com.taiton.controller;
 
 import com.taiton.entity.EmployeeEntity;
 import com.taiton.entity.MessageEntity;
+import com.taiton.exceptions.ResourceNotFoundException;
 import com.taiton.service.employee.EmployeeService;
 import com.taiton.service.message.MessageService;
 import com.taiton.validator.MessageValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -35,17 +37,21 @@ public class ReservationController {
         binder.setValidator(new MessageValidator());
     }*/
 
+
+
     @PostMapping("/addMessage")
     public ResponseEntity<String> addMessage(@RequestBody MessageEntity message, BindingResult bindingResult) {
         message.setBoardroomlistIdBoardroomList(14);
         messageValidator.validate(message, bindingResult);
-        if (!bindingResult.hasErrors()) {
+        if (!bindingResult.hasErrors())
+        {
             if (messageService.save(message)) {
                 return ResponseEntity.ok("Ok!");
                 //выкинуть ошибку
-                //return "redirect:/error";
             }
             //return "Добавление прошло успещно";
+        } else {
+            throw new ResourceNotFoundException();
         }
         return ResponseEntity.badRequest().body("Bad Request");
     }
