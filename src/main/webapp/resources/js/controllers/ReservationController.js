@@ -20,7 +20,7 @@ ReservationController = function ($scope, $http) {
             };
         }).error(function (data, status) {
             if (status === 400){
-                $scope.setError('Чо-т не то!')
+                $scope.setError('Ошибка! Проверьте введенные данные!')
             } else {
                 $scope.setError('Не удалось добавить заявку')
             }
@@ -40,7 +40,7 @@ ReservationController = function ($scope, $http) {
             };
             $scope.editMode = false;
         }).error(function() {
-            $scope.setError('Could not update the message');
+            $scope.setError('Не удалось обновить заявку');
         });
     };
 

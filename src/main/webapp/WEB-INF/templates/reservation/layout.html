@@ -2,6 +2,16 @@
     {{errorMessage}}
 </div>
 <form class="form-horizontal">
+
+    <div class="control-group" >
+        <label class="control-label">Выберите свой профиль</label>
+        <div class="controls">
+            <select required ng-model="message.employeeIdEmployee"
+                    ng-options="employee as employee.name for employee in employees">
+            </select>
+        </div>
+    </div>
+
     <div class="control-group">
         <label class="control-label">Дата бронирования</label>
         <div class="controls">
@@ -28,40 +38,29 @@
         </div>
     </div>
 
-    <div class="control-group" >
-        <label class="control-label">Выберите свой профиль</label>
-        <div class="controls">
-            <select required ng-model="message.employeeIdEmployee"
-                    ng-options="employee as employee.name for employee in employees">
-            </select>
-        </div>
-
-    </div>
-
     <div class="control-group">
         <label class="control-label">
             <a href="#/registration">Не нашли свой профиль?</a>
         </label>
         <div class="controls">
-
         </div>
     </div>
 
     <div class="control-group">
         <div class="controls">
             <button type="button" class="btn btn-primary" ng-disabled="!message.durationTime || !message.requestedTime || !message.requestedDate" ng-hide="editMode" ng-click="addMessage(message)">Подать заявку</button>
-            <button type="button" class="btn btn-primary" ng-disabled="!message.durationTime || !message.requestedTime || !message.requestedDate" ng-show="editMode" ng-click="updateMessage(message)">Save Message</button>
-            <button type="button" class="btn" ng-click="resetMessageForm(message)">Reset</button>
+            <button type="button" class="btn btn-primary" ng-disabled="!message.durationTime || !message.requestedTime || !message.requestedDate" ng-show="editMode" ng-click="updateMessage(message)">Сохранить заявку</button>
+            <button type="button" class="btn" ng-click="resetMessageForm(message)">Сбросить</button>
         </div>
     </div>
 </form>
 <hr />
-
+<h3 ng-show="messages != null && messages.length > 0" ng-cloak="">Записи бронирования конференц-зала на {{reqDate}}</h3>
 <div ng-cloak="" class="alert alert-info" ng-show="messages.length == 0 || messages == null">
     Заявок еще нет.
 </div>
 <table class="table table-bordered table-striped" ng-show="messages.length > 0">
-    <h3 ng-show="messages != null" ng-cloak="">Записи бронирования конференц-зала на {{reqDate}}</h3>
+
     <thead>
     <tr>
         <th style="text-align: center;">Время начала встречи</th>
@@ -75,7 +74,7 @@
         <td style="width: 100px; text-align: center;" ng-bind="message.requestedTime"></td>
         <td style="width: 100px; text-align: center;" ng-bind="message.durationTime"></td>
         <td style="width: 100px; text-align: center;" ng-bind="message.employee">
-            <button class="btn btn-mini btn-success" ng-click="editMessage(message)">Edit</button>
+            <button class="btn btn-mini btn-success" ng-click="editMessage(message)">Изменить</button>
         </td>
     </tr>
     </tbody>

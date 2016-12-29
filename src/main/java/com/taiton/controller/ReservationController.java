@@ -36,11 +36,11 @@ public class ReservationController {
         message.setBoardroomlistIdBoardroomList(14);
         messageValidator.validate(message, bindingResult);
         if(bindingResult.hasErrors()) {
-            return new ResponseEntity<MessageEntity>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } else if (messageService.save(message)) {
-            return new ResponseEntity<MessageEntity>(message, HttpStatus.OK);
+            return new ResponseEntity<>(message, HttpStatus.OK);
         }
-        return new ResponseEntity<MessageEntity>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping("/employeeList.json")
