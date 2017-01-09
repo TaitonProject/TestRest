@@ -1,43 +1,43 @@
-<div class="alert alert-danger" ng-show="error">
-    {{errorMessage}}
-</div>
-<form class="form-horizontal">
-    <div class="control-group">
-        <div class="controls">
-            <input type="text" id="employee_name" ng-model="employee.name"
-                   placeholder="Имя" required="required" min="6" />
-        </div>
-    </div>
-    <div class="control-group">
-        <hr />
-        <div class="controls">
-            <button type="button" class="btn btn-primary" ng-disabled="!employee.name" ng-hide="editMode" ng-click="addEmployee(employee)">Добавить сотрудника</button>
-            <button type="button" class="btn btn-primary" ng-disabled="!employee.name" ng-show="editMode" ng-click="updateEmployee(employee)">Сохранить сотрудника</button>
-            <button type="button" class="btn" ng-click="resetEmployeeForm()">Сбросить</button>
-        </div>
-    </div>
-</form>
-<hr />
-<h3>Список сотрудников</h3>
-<div class="alert alert-info" ng-show="employees.length == 0">
-    Список сотрудников пуст
-</div>
-<table class="table table-bordered table-striped" ng-show="employees.length > 0">
-    <thead>
-    <tr>
-        <th style="text-align: center; width: 25px;">Уникальный идентификатор</th>
-        <th style="text-align: center;">Имя</th>
-        <th style="text-align: center;">Дейсвтие</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr ng-repeat="employee in employees | orderBy:predicate">
-        <td style="text-align: center;">{{employee.idEmployee}}</td>
-        <td style="text-align: center;">{{employee.name}}</td>
-        <td style="width:100px;text-align: center;">
-            <button class="btn btn-mini btn-danger" ng-click="removeEmployee(employee.idEmployee)">Удалить</button>
-            <button class="btn btn-mini btn-success" ng-click="editEmployee(employee)">Изменить</button>
-        </td>
-    </tr>
-    </tbody>
-</table>
+<!--<div class="alert alert-danger" ng-show="error">-->
+    <!--{{errorMessage}}-->
+<!--</div>-->
+<!--<form class="form-horizontal">-->
+    <!--<div class="control-group">-->
+        <!--<div class="controls">-->
+            <!--<input type="text" id="employee_name" ng-model="employee.name"-->
+                   <!--placeholder="Имя" required="required" min="6" />-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="control-group">-->
+        <!--<hr />-->
+        <!--<div class="controls">-->
+            <!--<button type="button" class="btn btn-primary" ng-disabled="!employee.name" ng-hide="editMode" ng-click="addEmployee(employee)">Добавить сотрудника</button>-->
+            <!--<button type="button" class="btn btn-primary" ng-disabled="!employee.name" ng-show="editMode" ng-click="updateEmployee(employee)">Сохранить сотрудника</button>-->
+            <!--<button type="button" class="btn" ng-click="resetEmployeeForm()">Сбросить</button>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</form>-->
+<!--<hr />-->
+<!--<h3>Список сотрудников</h3>-->
+<!--<div class="alert alert-info" ng-show="employees.length == 0">-->
+    <!--Список сотрудников пуст-->
+<!--</div>-->
+<!--<table class="table table-bordered table-striped" ng-show="employees.length > 0">-->
+    <!--<thead>-->
+    <!--<tr>-->
+        <!--<th style="text-align: center; width: 25px;">Уникальный идентификатор</th>-->
+        <!--<th style="text-align: center;">Имя</th>-->
+        <!--<th style="text-align: center;">Дейсвтие</th>-->
+    <!--</tr>-->
+    <!--</thead>-->
+    <!--<tbody>-->
+    <!--<tr ng-repeat="employee in employees | orderBy:predicate">-->
+        <!--<td style="text-align: center;">{{employee.idEmployee}}</td>-->
+        <!--<td style="text-align: center;">{{employee.name}}</td>-->
+        <!--<td style="width:100px;text-align: center;">-->
+            <!--<button class="btn btn-mini btn-danger" ng-click="removeEmployee(employee.idEmployee)">Удалить</button>-->
+            <!--<button class="btn btn-mini btn-success" ng-click="editEmployee(employee)">Изменить</button>-->
+        <!--</td>-->
+    <!--</tr>-->
+    <!--</tbody>-->
+<!--</table>-->

@@ -10,6 +10,7 @@ import java.sql.Time;
 @Entity
 @Table(name = "boardroomlist", schema = "heroku_f53d154873f59df", catalog = "")
 public class BoardroomlistEntity implements Serializable{
+
     private Integer idBoardroomList;
     private Time openningTime;
     private Time closingTime;

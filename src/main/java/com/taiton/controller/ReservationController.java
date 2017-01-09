@@ -19,6 +19,7 @@ import java.util.List;
  * Created by Taiton on 10/25/2016.
  */
 @RestController
+@CrossOrigin(origins = "http://localhost:8090")
 @RequestMapping("/reservation")
 public class ReservationController {
 
@@ -35,7 +36,7 @@ public class ReservationController {
     public ResponseEntity<MessageEntity> addMessage(@RequestBody MessageEntity message, BindingResult bindingResult) {
         message.setBoardroomlistIdBoardroomList(14);
         messageValidator.validate(message, bindingResult);
-        if(bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } else if (messageService.save(message)) {
             return new ResponseEntity<>(message, HttpStatus.OK);
@@ -57,8 +58,17 @@ public class ReservationController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @DeleteMapping("/delMessage/{id}")
+    public ResponseEntity<Void> deleteMessage(@PathVariable("id") Integer id){
+        if (messageService.findOne(id) != null) {
+            messageService.delete(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
     @PutMapping(value = "/update")
-    public void updateRailwayStation(@RequestBody MessageEntity message) {
+    public void updateMessage(@RequestBody MessageEntity message) {
         messageService.save(message);
     }
 
