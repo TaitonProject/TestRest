@@ -1,10 +1,17 @@
 package com.taiton.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.taiton.jsonConverter.EmployeeDeserializer;
+import com.taiton.jsonConverter.EmployeeSerializer;
+
 import javax.persistence.*;
 
 /**
  * Created by Taiton on 12/22/2016.
  */
+@JsonDeserialize(using = EmployeeDeserializer.class)
+@JsonSerialize(using = EmployeeSerializer.class)
 @Entity
 @Table(name = "employee", schema = "heroku_f53d154873f59df", catalog = "")
 public class EmployeeEntity {
