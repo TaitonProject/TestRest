@@ -28,6 +28,7 @@ public class MessageSerializer extends JsonSerializer<MessageEntity> {
         String employeeIdName = employeeName + " " + message.getEmployeeIdEmployee();
 
         jsonGenerator.writeStartObject();
+        jsonGenerator.writeNumberField("idMessage", message.getIdMessage());
         jsonGenerator.writeStringField("requestedDate", requestedDate);
         jsonGenerator.writeStringField("requestedTime", requestedTime);
         jsonGenerator.writeStringField("durationTime", durationTime);

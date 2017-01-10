@@ -33,6 +33,9 @@ public class MessageDeserializer extends JsonDeserializer<MessageEntity> {
 
         int idEmployee = node.get("employeeIdEmployee").get("idEmployee").asInt();
 
+        int idMessage = node.get("idMessage").asInt();
+
+        message.setIdMessage(idMessage);
         message.setRequestedDate(requestedDate);
         message.setRequestedTime(requestedTime);
         message.setDurationTime(durationTime);
