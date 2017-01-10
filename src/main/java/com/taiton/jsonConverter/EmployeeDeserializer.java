@@ -20,11 +20,12 @@ public class EmployeeDeserializer extends JsonDeserializer<EmployeeEntity> {
         EmployeeEntity employee = new EmployeeEntity();
         JsonNode node = jsonParser.getCodec().readTree(jsonParser);
 
-        int idEmployee = node.get("idEmployee").asInt();
-        String name = node.get("name").asText();
+        String employeeString = node.get("employee").asText();
 
-        employee.setIdEmployee(idEmployee);
-        employee.setName(name);
+        String[] employeeParse = employeeString.split(employeeString);
+
+        employee.setIdEmployee(Integer.getInteger(employeeParse[0]));
+        employee.setName(employeeParse[1]);
         return employee;
     }
 

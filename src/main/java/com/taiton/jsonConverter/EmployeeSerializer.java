@@ -15,11 +15,8 @@ public class EmployeeSerializer extends JsonSerializer<EmployeeEntity> {
     @Override
     public void serialize(EmployeeEntity employee, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
 
-        String name = employee.getName();
-
         jsonGenerator.writeStartObject();
-        jsonGenerator.writeNumberField("idEmployee", employee.getIdEmployee());
-        jsonGenerator.writeStringField("name", name);
+        jsonGenerator.writeStringField("employee", employee.getIdEmployee().toString() + " " + employee.getName());
         jsonGenerator.writeEndObject();
 
     }
