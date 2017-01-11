@@ -6,15 +6,14 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.taiton.entity.MessageEntity;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import java.io.IOException;
 import java.sql.Time;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.sql.Date;
-import java.time.LocalTime;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+
 
 /**
  * Created by Taiton on 12/22/2016.
@@ -26,19 +25,30 @@ public class MessageDeserializer extends JsonDeserializer<MessageEntity> {
         MessageEntity message = new MessageEntity();
         JsonNode node = jsonParser.getCodec().readTree(jsonParser);
 
-        Date requestedDate = Date.valueOf(node.get("requestedDate").asText());
+        String requestedDateStr = node.get("requestedDate").asText();
+        String requestedTimeStr = node.get("requestedTime").asText();
+        String durationTimeStr = node.get("durationTime").asText();
+
+        DateTimeFormatter formatterDate = DateTimeFormat.forPattern("yyyy-MM-dd");
+        DateTime requestedDate = formatterDate.parseDateTime(requestedDateStr);
+
+        DateTimeFormatter formatterTime = DateTimeFormat.forPattern("hh:mm");
+        DateTime requestedTime = formatterTime.parseDateTime(requestedTimeStr);
+        DateTime durationTime = formatterTime.parseDateTime(durationTimeStr);
+
+        //Date requestedDate = Date.valueOf(node.get("requestedDate").asText());
         //  Такое себе, потом переделать
-        Time requestedTime = Time.valueOf(node.get("requestedTime").asText() + ":00");
-        Time durationTime = Time.valueOf(node.get("durationTime").asText() + ":00");
+        //Time requestedTime = Time.valueOf(node.get("requestedTime").asText() + ":00");
+        //Time durationTime = Time.valueOf(node.get("durationTime").asText() + ":00");
 
-        int idEmployee = node.get("employeeIdEmployee").get("idEmployee").asInt();
+        int idEmployee = node.get("employee").asInt();
 
-        int idMessage = node.get("idMessage").asInt();
+        ///int idMessage = node.get("idMessage").asInt();
 
-        message.setIdMessage(idMessage);
-        message.setRequestedDate(requestedDate);
-        message.setRequestedTime(requestedTime);
-        message.setDurationTime(durationTime);
+        //message.setIdMessage(idMessage);
+        message.setRequestedDate((Date) requestedDate.toDate());
+        message.setRequestedTime(new Time(requestedTime.getMillis()));
+        message.setDurationTime(new Time(durationTime.getMillis()));
         message.setEmployeeIdEmployee(idEmployee);
         return message;
     }

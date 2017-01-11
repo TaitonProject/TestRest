@@ -10,8 +10,8 @@ import javax.persistence.*;
 /**
  * Created by Taiton on 12/22/2016.
  */
-@JsonDeserialize(using = EmployeeDeserializer.class)
-@JsonSerialize(using = EmployeeSerializer.class)
+/*@JsonDeserialize(using = EmployeeDeserializer.class)
+@JsonSerialize(using = EmployeeSerializer.class)*/
 @Entity
 @Table(name = "employee", schema = "heroku_f53d154873f59df", catalog = "")
 public class EmployeeEntity {
