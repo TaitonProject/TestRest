@@ -38,8 +38,8 @@ public class MessageDeserializer extends JsonDeserializer<MessageEntity> {
 */
         Date requestedDate = Date.valueOf(node.get("requestedDate").asText());
         //  Такое себе, потом переделать
-        Time requestedTime = Time.valueOf(node.get("requestedTime").asText() + ":00");
-        Time durationTime = Time.valueOf(node.get("durationTime").asText() + ":00");
+        Time requestedTime = Time.valueOf(node.get("startTime").asText() + ":00");
+        Time durationTime = Time.valueOf(node.get("endTime").asText() + ":00");
 
         int idEmployee = node.get("employee").asInt();
 
