@@ -49,7 +49,7 @@ public class MessageValidator implements Validator {
             errors.reject("errorMessage","message.afterTime");
         } else if(message.getDurationTime().getTime() > closingTime){
             errors.reject("errorMessage","message.earlyTime");
-        } else if(message.getRequestedDate().getTime() < new Date(System.currentTimeMillis()).getTime()){
+        } else if(message.getRequestedDate().getTime() <= new Date(System.currentTimeMillis()).getTime()){
             errors.reject("errorMessage","message.earlyDate");
         } else if(message.getDurationTime().getTime() <= message.getRequestedTime().getTime()){
             errors.reject("errorMessage","message.wrongInterval");
