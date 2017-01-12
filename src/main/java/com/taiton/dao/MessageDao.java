@@ -16,7 +16,7 @@ import java.util.List;
  */
 @Transactional
 public interface MessageDao extends JpaRepository<MessageEntity, Integer> {
-    @Query(value = "select * from message as m where m.requestedDate = :date", nativeQuery = true)
+    @Query(value = "select * from message as m where m.requestedDate = :date order by m.requestedTime", nativeQuery = true)
     List<MessageEntity> findByDate(@Param("date") Date date);
 
     @Query(value = "select count(*) from message as m where (m.requestedDate = :messageInput_requestDate) " +
